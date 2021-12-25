@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="MailApp">
+  <Id>69236c93-c473-42c0-aaf6-ac25eac10690</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>SmartDev</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Seafile"/>
+  <Description DefaultValue="Outlook addin to interact with seafile "/>
+  <IconUrl DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/seafile-icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/seafile-icon-128.png"/>
+  <!-- <SupportUrl DefaultValue="https://www.contoso.com/help"/> -->
+  <!-- <AppDomains>
+    <AppDomain>https://www.contoso.com</AppDomain>
+  </AppDomains> -->
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://demo99.luckycloud-pro.de/addin/taskpane.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read" />
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="Commands.Url"/>
+          <!-- Message Read -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="msgReadOpenPaneButton">
+                  <Label resid="UploadAttachment.Label"/>
+                  <Supertip>
+                    <Title resid="UploadAttachment.Label"/>
+                    <Description resid="UploadAttachment.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="upload-icon-16x16"/>
+                    <bt:Image size="32" resid="upload-icon-32x32"/>
+                    <bt:Image size="80" resid="upload-icon-80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>uploadattachment</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Menu" id="OptionMenuButton">
+                  <Label resid="Options.Label"/>
+                  <Supertip>
+                    <Title resid="Options.Label"/>
+                    <Description resid="OptionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="seafile-icon-16x16"/>
+                    <bt:Image size="32" resid="seafile-icon-32x32"/>
+                    <bt:Image size="80" resid="seafile-icon-80x80"/>
+                  </Icon>
+                  <Items>
+                    <Item id="LoginButton">
+                      <Label resid="menuItem1ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem1ReadLabel" />
+                        <Description resid="menuItem1ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="login-icon-16x16" />
+                        <bt:Image size="32" resid="login-icon-32x32" />
+                        <bt:Image size="80" resid="login-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>login</FunctionName>
+                      </Action>
+                    </Item>
+                    <Item id="ShareButton">
+                      <Label resid="menuItem2ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem2ReadLabel" />
+                        <Description resid="menuItem2ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="share-icon-16x16" />
+                        <bt:Image size="32" resid="share-icon-32x32" />
+                        <bt:Image size="80" resid="share-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>uploadattachment</FunctionName>
+                      </Action>
+                    </Item>
+                    <Item id="SettingsButton">
+                      <Label resid="menuItem3ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem3ReadLabel" />
+                        <Description resid="menuItem3ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="setting-icon-16x16" />
+                        <bt:Image size="32" resid="setting-icon-32x32" />
+                        <bt:Image size="80" resid="setting-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>settingsPage</FunctionName>
+                      </Action>
+                    </Item>
+                  </Items>
+                  <!-- <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action> -->
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="msgCompseTab">
+              <Group id="msgComposeGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="msgComposeOpenPaneButton">
+                  <Label resid="Attach.Label"/>
+                  <Supertip>
+                    <Title resid="Attach.Label"/>
+                    <Description resid="Attach.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="attach-icon-16x16"/>
+                    <bt:Image size="32" resid="attach-icon-32x32"/>
+                    <bt:Image size="80" resid="attach-icon-80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>Attach</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Menu" id="OptionMenuButton_compose">
+                  <Label resid="Options.Label"/>
+                  <Supertip>
+                    <Title resid="Options.Label"/>
+                    <Description resid="OptionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="seafile-icon-16x16"/>
+                    <bt:Image size="32" resid="seafile-icon-32x32"/>
+                    <bt:Image size="80" resid="seafile-icon-80x80"/>
+                  </Icon>
+                  <Items>
+                    <Item id="LoginButton_compose">
+                      <Label resid="menuItem1ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem1ReadLabel" />
+                        <Description resid="menuItem1ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="login-icon-16x16" />
+                        <bt:Image size="32" resid="login-icon-32x32" />
+                        <bt:Image size="80" resid="login-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>login</FunctionName>
+                      </Action>
+                    </Item>
+                    <Item id="ShareButton_compose">
+                      <Label resid="menuItem2ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem2ReadLabel" />
+                        <Description resid="menuItem2ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="share-icon-16x16" />
+                        <bt:Image size="32" resid="share-icon-32x32" />
+                        <bt:Image size="80" resid="share-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>Attach</FunctionName>
+                      </Action>
+                    </Item>
+                    <Item id="SettingsButton_compose">
+                      <Label resid="menuItem3ReadLabel" />
+                      <Supertip>
+                        <Title resid="menuItem3ReadLabel" />
+                        <Description resid="menuItem3ReadSupertipDescription" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="setting-icon-16x16" />
+                        <bt:Image size="32" resid="setting-icon-32x32" />
+                        <bt:Image size="80" resid="setting-icon-80x80" />
+                      </Icon>
+                      <Action xsi:type="ExecuteFunction">
+                        <FunctionName>settingsPage</FunctionName>
+                      </Action>
+                    </Item>
+                  </Items>
+                  <!-- <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action> -->
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="upload-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/upload-icon-16.png"/>
+        <bt:Image id="upload-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/upload-icon-32.png"/>
+        <bt:Image id="upload-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/upload-icon-80.png"/>
+
+        <bt:Image id="attach-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/attach-icon-16.png"/>
+        <bt:Image id="attach-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/attach-icon-32.png"/>
+        <bt:Image id="attach-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/attach-icon-80.png"/>
+
+        <bt:Image id="seafile-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/seafile-icon-16.png"/>
+        <bt:Image id="seafile-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/seafile-icon-32.png"/>
+        <bt:Image id="seafile-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/seafile-icon-80.png"/>
+        <bt:Image id="login-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/login-icon-16.png"/>
+        <bt:Image id="login-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/login-icon-32.png"/>
+        <bt:Image id="login-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/login-icon-80.png"/>
+        <bt:Image id="share-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/share-icon-16.png"/>
+        <bt:Image id="share-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/share-icon-32.png"/>
+        <bt:Image id="share-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/share-icon-80.png"/>
+        <bt:Image id="setting-icon-16x16" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/setting-icon-16.png"/>
+        <bt:Image id="setting-icon-32x32" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/setting-icon-32.png"/>
+        <bt:Image id="setting-icon-80x80" DefaultValue="https://demo99.luckycloud-pro.de/addin/assets/setting-icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Commands.Url" DefaultValue="https://demo99.luckycloud-pro.de/addin/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://demo99.luckycloud-pro.de/addin/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="SEAFILE"/>
+        <bt:String id="UploadAttachment.Label" DefaultValue="Upload File"/>
+        <bt:String id="Attach.Label" DefaultValue="Attach"/>
+
+        <bt:String id="Options.Label" DefaultValue="Options"/>
+        <bt:String id="menuItem1ReadLabel" DefaultValue="Login"/>
+        <bt:String id="menuItem2ReadLabel" DefaultValue="Shares"/>
+        <bt:String id="menuItem3ReadLabel" DefaultValue="Settings"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="UploadAttachment.Tooltip" DefaultValue="Upload files from local machine to Seafile"/>
+        <bt:String id="Attach.Tooltip" DefaultValue="Attach file from your Seafile reposit"/>
+        <bt:String id="OptionButton.Tooltip" DefaultValue="Options"/>
+        <bt:String id="menuItem1ReadSupertipDescription" DefaultValue="Login to your seafile server"/>
+        <bt:String id="menuItem2ReadSupertipDescription" DefaultValue="Share files"/>
+        <bt:String id="menuItem3ReadSupertipDescription" DefaultValue="Config your settings"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

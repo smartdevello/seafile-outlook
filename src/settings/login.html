@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title>Settings</title>
+
+  <!-- Office JavaScript API -->
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Template styles -->
+  <link href="login.css" rel="stylesheet" type="text/css" />
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>  
+</head>
+
+<body class="ms-font-l">
+  <div class="global-container">
+    <div class="card login-form">
+    <div class="card-body">
+      <h3 class="card-title text-center">Log in to Seafile</h3>
+      <div class="card-text">
+        <!--
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+        <form id="regForm">
+          <!-- to error: add class "has-danger" -->
+          <div class="form-group">
+            <label for="seafile_env">Your Seafile Envioronment</label>
+            <input type="text" class="form-control form-control-sm"  id="seafile_env"  name="seafile_env" aria-describedby="emailHelp">
+          </div>
+
+          <div class="form-group">
+            <label for="username">Your Username or Email address</label>
+            <input type="email" class="form-control form-control-sm" id="username" name="username" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>            
+            <input type="password" class="form-control form-control-sm" id="password" name="password">
+          </div>
+          <div class="alert alert-success" role="alert">
+            You logged in successfully.
+          </div>
+          <div class="alert alert-danger" role="alert">
+            Your credential is not incorrect, please try again.
+          </div>
+
+          <button type="button" class="btn btn-primary btn-block" id="seafile_loginbutton">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>  
+</body>
+</html>
