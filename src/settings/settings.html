@@ -1,46 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">    
+    <link href="../helpers/jquery.filebrowser.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="settings.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
+    <title>Settings</title>
 
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-
-    <div class="wrapper">
-        <!--Top menu -->
-        <div class="sidebar">
-            <ul>
-                <li>
-                    <a href="#" class="active">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item">General</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">User account</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">Shares</span>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-
+    <div class="logo">
+        <img src="/assets/logo.svg"/>
     </div>
-  <script>
+    <div class="sidebar">
+        <ul>
 
-  </script>
+            <li>
+                <a href="#" class="sidebar-item active" data-target="password_content">
+                    <span class="icon"></span>
+                    <span class="item"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" data-target="expire_date_content">
+                    <span class="icon"></span>
+                    <span class="item"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" data-target="attachment_path_content">
+                    <span class="icon"></span>
+                    <span class="item"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" data-target="link_text_content">
+                    <span class="icon"></span>
+                    <span class="item"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="side-content" id="password_content">
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5 ></h5>
+                <p class="byline"></p>
+                <div class="custom_green_white_select">
+                    <div class="custom_without_password">
+                        <span></span>
+                    </div>
+                    <div class="custom_with_password">
+                        <input type="password">
+                        <span></span>
+                        <div class="eye"></div>
+                        <div class="error">
+                            <span class="ast" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5 ></h5>
+                <div class="custom_email_settings">
+                    <div class="always_default">
+                        <span></span>
+                    </div>
+                    <div class="ask_every_time">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group alert alert-success" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong></strong>
+            </div>
+            <div class="field-group">                
+                <button class="apply update_password_settings">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span></span>
+                </button>
+            </div>
+
+        </div>
+        <div class="side-content hide" id="expire_date_content">
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5></h5>
+                <p class="byline"></p>
+                <div class="custom_green_white_select">
+                    <div class="custom_without_expire_date">
+                        <span></span>
+                    </div>
+                    <div class="custom_with_expire">
+                        <input type="text">
+                        <span class="expire-desc"></span>
+                        <span class="expire-days"></span>
+                        <div class="error">
+                            <span class="ast" style="display: none;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5></h5>
+                <div class="custom_email_settings">
+                    <div class="always_default">
+                        <span></span>
+                    </div>
+                    <div class="ask_every_time">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group alert alert-success" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong></strong>
+            </div>
+            <div class="field-group">
+                <button class="apply update_expire_date_settings">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="side-content hide" id="attachment_path_content">
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5 ></h5>
+                <p class="byline"></p>
+                <div class="custom_green_white_select">
+                    <div class="custom_without_path">
+                        <span></span>
+                    </div>
+                    <div class="custom_with_path">
+                        <input type="text" readonly>
+                        <span></span>
+                        <div class="error">
+                            <span class="ast" style="display: none;"></span>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="filebrowser_container">
+                    <div id="browser"></div>
+                </div>
+            </div>
+
+
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5></h5>
+                <div class="custom_email_settings">
+                    <div class="always_default">
+                        <span></span>
+                    </div>
+                    <div class="ask_every_time">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group alert alert-success" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong></strong>
+            </div>
+            <div class="field-group">
+                <button class="apply update_attachment_path_settings">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="side-content hide" id="link_text_content">
+            <div class="field-group">
+                <h5 class="green"></h5>
+                <h5></h5>
+                <p class="byline"></p>
+                <div class="download_link_text">
+                    <input type="text">
+                </div>
+                <label class="radio_option_container option_filename">
+                    <span class="text">Myfile.docx</span>
+                    <input type="radio" name="download_link_option" id="option_filename">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio_option_container option_text">
+                    <span class="text"></span>
+                    <input type="radio" checked="checked" name="download_link_option" id="option_text">
+                    <span class="checkmark"></span>
+                </label>
+                  <label class="radio_option_container option_text_filename">
+                    <span class="text"></span>
+                    <input type="radio" name="download_link_option" id="option_text_filename">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio_option_container option_text_link">
+                    <span class="text"></span> 
+                    <input type="radio" name="download_link_option" id="option_text_link">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="field-group alert alert-success" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong></strong>
+            </div>
+            <div class="field-group">
+                <button class="apply update_link_text_settings">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

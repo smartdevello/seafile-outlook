@@ -1,130 +1,311 @@
-/*!
- *
- * jQuery File Browser - directory browser jQuery plugin version 0.8.4
- *
- * Copyright (c) 2016-2021 Jakub T. Jankiewicz <https://jcubic.pl/me>
- * Released under the MIT license
- *
- * Date: Sun, 09 May 2021 10:14:37 +0000
- */
-.browser-widget.hidden, .browser-widget .hidden {
-    visibility: hidden;
-}
 .browser-widget ul:not(.ui-menu) {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .browser-menu {
-    float: left;
-    position: absolute;
-    z-index: 99999999;
+  float: left;
+  position: absolute;
+  z-index: 99999999;
 }
 .browser-widget li[draggable] {
-  /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
 .browser-widget ul:not(.ui-menu) > li {
-    display: inline-block;
-    position: relative;
-    box-sizing: border-box;
-    padding-top: 32px;
-    text-align: center;
-    margin: 5px;
-    word-break: break-word;
-    vertical-align: top;
-    width: 60px;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 32px;
+  text-align: center;
+  word-break: break-word;
+  vertical-align: top;
+  width: 60px;
 }
-.browser-widget ul:not(.ui-menu) > li, .browser-widget.no-select * {
-    -khtml-user-select: none;
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */
+.browser-widget ul:not(.ui-menu) > li,
+.browser-widget.no-select * {
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .browser-widget {
-    font-family: sans-serif;
-    font-size: 12px;
+  font-family: sans-serif;
+  font-size: 12px;
 }
 .browser-widget .toolbar {
-    background: #6b6b6b;
-    background: -moz-linear-gradient(top, #6b6b6b 0%, #262626 100%);
-    background: -webkit-linear-gradient(top, #6b6b6b 0%,#262626 100%);
-    background: linear-gradient(to bottom, #6b6b6b 0%,#262626 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#262626',GradientType=0 );
-    color: white;
+  background: #6b6b6b;
+  background: -moz-linear-gradient(top, #6b6b6b 0%, #262626 100%);
+  background: -webkit-linear-gradient(top, #6b6b6b 0%, #262626 100%);
+  background: linear-gradient(to bottom, #6b6b6b 0%, #262626 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#262626',GradientType=0 );
+  color: white;
 }
 .browser-widget .toolbar ul:not(.labels) li {
-    text-indent: -99999px;
+  text-indent: -99999px;
 }
-.browser-widget ul:not(.ui-menu) > li::before, .browser-widget .adress-bar button {
-    background: transparent url(assets/icons.svg) no-repeat;
+.browser-widget ul:not(.ui-menu) > li::before,
+.browser-widget .adress-bar button {
+  background: transparent url(assets/icons_green.svg) no-repeat;
 }
 .browser-widget .adress-bar button {
-    text-indent: -99999px;
-    width: 32px;
-    height: 32px;
-    border: none;
-    background-position: -64px -128px;
-    cursor: pointer;
-    outline: none;
+  text-indent: -99999px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-position: -64px -128px;
+  cursor: pointer;
+  outline: none;
+  background-position: -32px -32px;
 }
 .browser-widget .adress-bar input {
-    width: calc(100% - 32px - 10px);
-    border: none;
-    padding: 4px 2px;
-    box-sizing: border-box;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+  width: calc(100% - 32px - 10px);
+  border: none;
+  padding: 4px 2px;
+  box-sizing: border-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 .browser-widget .content {
-    overflow: auto;
-    height: calc(100% - 88px);
-    position: relative;
+  overflow: auto;
+  position: relative;
+  padding: 15px 15px;
 }
 .browser-widget .content .selection {
-    border: 1px dotted #000;
-    position: absolute;
+  border: 1px dotted #000;
+  position: absolute;
 }
-.browser-widget .content ul:not(.ui-menu) li.selected::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    background: #0b93d5;
-}
+/* .browser-widget .content ul:not(.ui-menu) li.selected::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background: #0b93d5;
+  border-radius: 10px;
+} */
 .browser-widget .content ul:not(.ui-menu) li {
-    border: 1px solid transparent;
+  border: 1px solid transparent;
 }
 .browser-widget .content ul:not(.ui-menu) li span {
-    cursor: text;
-    overflow-wrap: break-word;
+  cursor: text;
+  overflow-wrap: break-word;
 }
 .browser-widget .content ul:not(.ui-menu) li textarea {
-    width: 100%;
-    resize: vertical;
-    box-sizing: border-box;
-    border: none;
-    position: relative;
-    top: 2px;
-    outline: none;
-    text-align: center;
-    overflow: hidden;
-    min-height: 55px;
+  width: 100%;
+  resize: vertical;
+  box-sizing: border-box;
+  border: none;
+  position: relative;
+  top: 2px;
+  outline: none;
+  text-align: center;
+  overflow: hidden;
+  min-height: 55px;
 }
 .browser-widget .content ul:not(.ui-menu) li.rename span,
 .browser-widget .content ul:not(.ui-menu) li.new span {
-    display: none;
+  display: none;
 }
 .browser-widget .content ul:not(.ui-menu) li.active {
-    border: 1px dotted gray;
+  border: 1px dotted gray;
 }
 .browser-widget ul:not(.ui-menu) li::before {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  background-clip: content-box;
+  content: "";
+  position: absolute;
+  top: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.browser-widget .toolbar li:not(.disabled):hover::before {
+  background-color: #0b93d5;
+  background-image: url(assets/icons_white.svg);
+  cursor: pointer;
+}
+.browser-widget .toolbar ul:not(.labels) li {
+  padding-top: 20px;
+}
+.browser-widget ul.labels li.back::before {
+  background-position: 0 -160px;
+}
+.browser-widget ul.labels li.up::before {
+  background-position: -32px -160px;
+}
+.browser-widget ul.labels li.refresh::before {
+  background-position: -96px -160px;
+}
+.browser-widget .content ul:not(.ui-menu) .drive::before {
+  background-position: 0 -128px;
+}
+.browser-widget .content ul:not(.ui-menu) .file::before {
+  background-position: 0 -96px;
+}
+.browser-widget .content ul:not(.ui-menu) .svg::before {
+  background-position: -64px 0;
+}
+.browser-widget .content ul:not(.ui-menu) .txt::before {
+  background-position: -32px -64px;
+}
+.browser-widget .content ul:not(.ui-menu) .pdf::before {
+  background-position: -96px -64px;
+}
+.browser-widget .content ul:not(.ui-menu) .php::before {
+  background-position: -32px -32px;
+}
+.browser-widget .content ul:not(.ui-menu) .html::before {
+  background-position: -64px -32px;
+}
+.browser-widget .content ul:not(.ui-menu) .js::before {
+  background-position: -96px 0;
+}
+.browser-widget .content ul:not(.ui-menu) .json::before {
+  background-position: -96px -32px;
+}
+.browser-widget .content ul:not(.ui-menu) .css::before {
+  background-position: 0 -32px;
+}
+.browser-widget .content ul:not(.ui-menu) .doc::before,
+.browser-widget .content ul:not(.ui-menu) .docx::before {
+  background-position: -64px -64px;
+}
+.browser-widget .content ul:not(.ui-menu) .xls::before,
+.browser-widget .content ul:not(.ui-menu) .xlsx::before {
+  background-position: -32px -96px;
+}
+.browser-widget .content ul:not(.ui-menu) .ppt::before,
+.browser-widget .content ul:not(.ui-menu) .pptx::before {
+  background-position: -64px -96px;
+}
+.browser-widget .content ul:not(.ui-menu) .jpg::before,
+.browser-widget .content ul:not(.ui-menu) .jpeg::before,
+.browser-widget .content ul:not(.ui-menu) .gif::before,
+.browser-widget .content ul:not(.ui-menu) .bmp::before,
+.browser-widget .content ul:not(.ui-menu) .png::before {
+  background-position: 0 -64px;
+}
+.browser-widget .content ul:not(.ui-menu) .md::before,
+.browser-widget .content ul:not(.ui-menu) .markdown::before {
+  background-position: -96px -96px;
+}
+.ui-widget-content {
+  background-color: #F4F5F7;
+  background-image: none;
+  color: black;
+}
+.ui-widget.ui-widget-content {
+  border: none;
+  border-radius: 0px;
+}
+.ui-widget-header {
+  border: 1px solid;
+  border-color: #33333330;
+  background: none;
+}
+.browser-widget .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: linear-gradient(to bottom, #a8a78c33 0%, #e8e79d5c 100%); */
+  background: white;
+  color: black;
+  border: 1px solid #DBDBDB;
+}
+.browser-widget .toolbar ul.labels li:before{
+  visibility: visible;
+}
+.browser-widget .toolbar ul.labels li{
+  width: 32px;
+  border-left: 1px solid #DBDBDB;
+}
+.ui-dialog .ui-dialog-content{
+  padding: 0px;
+}
+.ui-dialog{
+  padding: 0px;
+}
+.ui-dialog-titlebar {
+  display: none;
+}
+.text-center {
+  text-align: center;
+}
+.browser-widget ul:not(.ui-menu) li.upload::before {
+  background-position: -96px -192px;
+}
+.browser-widget ul:not(.ui-menu) li.download::before {
+  background-position: 0px -192px
+}
+.browser-widget div.toolbar  ul:not(.ui-menu) li.grid::before {
+  background-position: -32px -192px;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.grid {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 15px;
+  padding-bottom: 7px;
+  text-align: left;
+  padding-left: 50px;
+  margin: 5px;
+  word-break: break-word;
+  width: 200px;
+  border-radius: 5px;
+  border-color: #EDEDED;
+  height: 48px;
+  background-color: white;
+}
+.browser-widget .content ul:not(.ui-menu) li.selected{
+	background-color: #0b93d5 !important;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.grid::before{
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  background-clip: content-box;
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  left: 10px;
+  right: auto;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.grid:after {
+  content: "";
+  position: absolute;
+  border: 1px solid black;
+  border-color: #F4F5F7;
+  height: 44px;
+  left: 40px;
+  top: 0px;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.grid.directory:after {
+  border: none;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.list , div.content div.header{
+  display: flex;
+  align-items: center;
+  padding-left: 70px;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: left;
+  height: 40px;
+  box-sizing:border-box;
+  border-bottom: 1px solid #DBDBDB;
+}
+.browser-widget div.content ul:not(.ui-menu) > li.list::before {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -132,77 +313,124 @@
     background-clip: content-box;
     content: "";
     position: absolute;
-    top: 0;
+    top: 50%;
     margin: auto;
-    left: 0;
-    right: 0;
+    left: 25px;
+    transform: translateY(-50%);
+    right: auto;
 }
-.browser-widget .toolbar li:not(.disabled):hover::before {
-    background-color: #0b93d5;
-    cursor: pointer;
+.browser-widget div.content ul:not(.ui-menu) > li.grid input{
+  display: none;
 }
-.browser-widget .toolbar ul:not(.labels) li {
-    padding-top: 20px;
+
+.browser-widget div.content ul:not(.ui-menu) > li.list input{
+  display: inline-block;
+  left: 0px;
+  position: absolute;
 }
-.browser-widget ul.labels li.back::before {
-    background-position: 0 -160px
+
+div.toolbar li.list:before {
+  background-position: -64px -192px;
 }
-.browser-widget ul.labels li.up::before {
-    background-position: -32px -160px
+div.toolbar div.adress-bar div.path-bar div.path-button{
+  display: inline;
+  margin: 0 5px;
+
 }
-.browser-widget ul.labels li.refresh::before {
-    background-position: -96px -160px
+div.toolbar div.adress-bar div.path-bar div.path-button:hover{
+  color: #545454;
+  cursor: pointer;
 }
-.browser-widget .content ul:not(.ui-menu) .drive::before {
-    background-position: 0 -128px;
+div.toolbar div.adress-bar div.path-bar div.path-button.active{
+  color: #545454;
 }
-.browser-widget .content ul:not(.ui-menu) .file::before {
-    background-position: 0 -96px;
+div.adress-bar input, div.adress-bar button.home{
+  display: none;
 }
-.browser-widget .content ul:not(.ui-menu) .svg::before {
-    background-position: -64px 0;
+div.toolbar div.adress-bar div.path-bar{
+    color: #BDBDBD;
+    font-size: 16px;
+    padding: 0px 30px;
+    display: inline-block;
 }
-.browser-widget .content ul:not(.ui-menu) .txt::before {
-    background-position: -32px -64px;
+
+div.content li.list span.name, div.content div.header span.name{
+  width: 45%;
 }
-.browser-widget .content ul:not(.ui-menu) .pdf::before {
-    background-position: -96px -64px;
+div.content li.list span.owner, div.content div.header span.owner{
+  width: 25%;
 }
-.browser-widget .content ul:not(.ui-menu) .php::before {
-    background-position: -32px -32px;
+div.content li.list span.mtime, div.content div.header span.mtime{
+  width: 15%;
 }
-.browser-widget .content ul:not(.ui-menu) .html::before {
-    background-position: -64px -32px;
+div.content li.list span.size, div.content div.header span.size{
+  width: 15%;
 }
-.browser-widget .content ul:not(.ui-menu) .js::before {
-    background-position: -96px 0;
+
+div.content li.grid span.owner, div.content li.grid span.mtime, div.content li.grid span.size{
+  display: none;
 }
-.browser-widget .content ul:not(.ui-menu) .json::before {
-    background-position: -96px -32px;
+div.content div.header span>span {
+  position: relative;
 }
-.browser-widget .content ul:not(.ui-menu) .css::before {
-    background-position: 0 -32px;
+
+div.content div.header span.active>span.up:after {
+  position: absolute;
+  content: "";
+  border: 4px solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-width: 6px;
+  right: -14px;
+  bottom: 5px;
 }
-.browser-widget .content ul:not(.ui-menu) .doc::before,
-.browser-widget .content ul:not(.ui-menu) .docx::before {
-    background-position: -64px -64px;
+div.content div.header span.active>span.down:after {
+  position: absolute;
+  content: "";
+  border: 4px solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-width: 6px;
+  transform: rotate(180deg);
+  right: -14px;
+  bottom: 1px;
 }
-.browser-widget .content ul:not(.ui-menu) .xls::before,
-.browser-widget .content ul:not(.ui-menu) .xlsx::before {
-    background-position: -32px -96px;
+div.content div.header>span:hover, div.content div.header>span.active{
+  cursor: pointer;
+  color: #42D75F;
 }
-.browser-widget .content ul:not(.ui-menu) .ppt::before,
-.browser-widget .content ul:not(.ui-menu) .pptx::before {
-    background-position: -64px -96px;
+div.global-container div.card-title{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 20px 0px;
 }
-.browser-widget .content ul:not(.ui-menu) .jpg::before,
-.browser-widget .content ul:not(.ui-menu) .jpeg::before,
-.browser-widget .content ul:not(.ui-menu) .gif::before,
-.browser-widget .content ul:not(.ui-menu) .bmp::before,
-.browser-widget .content ul:not(.ui-menu) .png::before {
-    background-position: 0 -64px;
+div.global-container div.card-title div.logo-image{
+  padding-left: 30px;
+  width: 50%;
 }
-.browser-widget .content ul:not(.ui-menu) .md::before,
-.browser-widget .content ul:not(.ui-menu) .markdown::before {
-    background-position: -96px -96px;
+div.global-container div.card-title input.search-box {
+  background-color: #F1F3F4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 13px;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  width: 30%;
+  padding: 5px 35px;
+  font-size: 15px;
+}
+div.global-container div.card-title input.search-box:focus-visible{
+  outline-width: 0px;
+}
+.browser-widget ul:not(.ui-menu) li.selectDefaultPath::before {
+  background-position: 0px -288px;
+}
+
+div.logo-image img:hover{
+  cursor: pointer;
 }

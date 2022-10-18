@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const urlDev = "https://localhost:3000/";
-const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlProd = "https://outlook.lc-testing.de/addin/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -15,7 +15,7 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
   const buildType = dev ? "dev" : "prod";
-  const config = {
+  const config = {    
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
@@ -24,8 +24,9 @@ module.exports = async (env, options) => {
       login: "./src/settings/login.js",
       filebrowser: "./src/helpers/jquery.filebrowser.js",
       downloadFile : "./src/downLoadfile/downLoadfile.js",
-      uploadAttachment: "./src/uploadAttachment/uploadAttachment.js",      
-      settings: "./src/settings/settings.js"
+      uploadFile: "./src/uploadFile/uploadFile.js",      
+      selectDefaultPath: "./src/selectDefaultPath/selectDefaultPath.js",
+      settings: "./src/settings/settings.js",
     },
     output: {
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
@@ -33,6 +34,9 @@ module.exports = async (env, options) => {
     },
     resolve: {
       extensions: [".html", ".js"],
+      fallback: {
+        "crypto": require.resolve("crypto-browserify"),
+      }
     },
     module: {
       rules: [
@@ -69,7 +73,7 @@ module.exports = async (env, options) => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "assets/icon-*",
+            from: "assets/icon*",
             to: "assets/[name][ext][query]",
           },
           {
@@ -85,6 +89,10 @@ module.exports = async (env, options) => {
             to: "assets/[name][ext][query]",
           },
           {
+            from: "assets/logout-icon-*",
+            to: "assets/[name][ext][query]",
+          },
+          {
             from: "assets/share-icon-*",
             to: "assets/[name][ext][query]",
           },
@@ -93,11 +101,43 @@ module.exports = async (env, options) => {
             to: "assets/[name][ext][query]",
           },
           {
-            from: "assets/icons.svg",
-            to: "assets/icons.svg",
+            from: "assets/attach-icon-*",
+            to: "assets/[name][ext][query]",
           },
           {
-            from: "assets/attach-icon-*",
+            from: "assets/grid-icon-*",
+            to: "assets/[name][ext][query]",
+          },
+          {
+            from: "assets/list-icon-*",
+            to: "assets/[name][ext][query]",
+          },
+          {
+            from: "assets/select-icon-*",
+            to: "assets/[name][ext][query]",
+          },
+          {
+            from: "assets/upload-icon.png",
+            to: "assets/upload-icon.png",
+          },
+          {
+            from: "assets/download-icon.png",
+            to: "assets/download-icon.png",
+          },
+          {
+            from: "assets/grid-icon.png",
+            to: "assets/grid-icon.png",
+          },
+          {
+            from: "assets/list-icon.png",
+            to: "assets/list-icon.png",
+          },
+          {
+            from: "assets/logo.svg",
+            to: "assets/logo.svg",
+          },
+          {
+            from: "assets/login_*",
             to: "assets/[name][ext][query]",
           },
           // {
@@ -125,12 +165,12 @@ module.exports = async (env, options) => {
       new HtmlWebpackPlugin({
         filename: "login.html",
         template: "./src/settings/login.html",
-        chunks: ["polyfill", "login"],
+        chunks: ["polyfill", "login", ],
       }),
       new HtmlWebpackPlugin({
-        filename: "uploadAttachment.html",
-        template: "./src/uploadAttachment/uploadAttachment.html",
-        chunks: ["polyfill","filebrowser", "uploadAttachment",  ],
+        filename: "uploadFile.html",
+        template: "./src/uploadFile/uploadFile.html",
+        chunks: ["polyfill", "filebrowser",  "uploadFile", ],
       }),
       new HtmlWebpackPlugin({
         filename: "downLoadfile.html",
@@ -140,7 +180,12 @@ module.exports = async (env, options) => {
       new HtmlWebpackPlugin({
         filename: "settings.html",
         template: "./src/settings/settings.html",
-        chunks: ["polyfill", "settings"],
+        chunks: ["polyfill", "filebrowser", "settings", ],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "selectDefaultPath.html",
+        template: "./src/selectDefaultPath/selectDefaultPath.html",
+        chunks: ["polyfill", "filebrowser", "selectDefaultPath", ],
       }),
       
     ],

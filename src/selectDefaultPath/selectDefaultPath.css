@@ -1,0 +1,52 @@
+#downloadLink{
+    position: absolute;
+    bottom: 30px;
+    width: 80%;
+    left: 10%;
+    display: none;
+}
+.loader {
+  z-index: 1000;
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#browser div.toolbar ul.labels li.upload, #browser div.toolbar ul.labels li.download, #browser div.toolbar ul.labels li.grid, #browser div.toolbar ul.labels li.list{
+  display: none;
+} 
+
+.browser-widget .content ul:not(.ui-menu) li.selected::after {
+  background: none;
+}
+.browser-widget .content ul:not(.ui-menu) li.selected.active::after {
+  background: #0b93d5;
+}
+.browser-widget ul:not(.ui-menu) > li.select::before{
+  background: transparent url(assets/select-icon-32.png) no-repeat;
+}
+#browser div.toolbar ul.labels li.select { 
+  display: inline-block;
+}
+div.content li.file {
+  display: none !important;
+}
+.ui-dialog {
+  position: relative !important;
+  height: auto !important;
+  width: auto !important;
+  top: 0px !important;
+  left: 0px !important;
+}
+

@@ -22,3 +22,15 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .ui-dialog {
+    position: relative !important;
+    height: auto !important;
+    width: auto !important;
+    top: 0px !important;
+    left: 0px !important;
+  }
+
+  div.toolbar li.selectDefaultPath{
+    display: none;
+  }

@@ -1,0 +1,33 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+image: node:latest
+
+variables:
+    USER: root
+    SERVER_IP: 78.47.35.181
+
+before_script:
+  - apt-get update
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - mkdir -p ~/.ssh
+  - eval $(ssh-agent -s)
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stage_deploy:
+  #artifacts:
+  #  paths:
+  #    - build/
+  script:
+    # build
+    - npm install
+    - npm run build
+    - ls -la
+    # push to server
+    - echo "$DEPLOY_KEY" | tr -d '\r' | ssh-add -
+    - ssh -p22 $USER@$SERVER_IP "rm -rf /build && mkdir -p /build"
+    - scp -P22 -r dist/* $USER@$SERVER_IP:/build
+    - ssh -p22 $USER@$SERVER_IP "cp -r /build/* /var/www/html/addin/"
